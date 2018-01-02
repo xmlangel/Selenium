@@ -1,6 +1,6 @@
 package com.xmlangel.selenium.page_objects;
 
-import com.lazerycode.selenium.util.Query;
+import com.xmlangel.selenium.utils.Query;
 import org.openqa.selenium.By;
 
 public class GoogleHomePage {

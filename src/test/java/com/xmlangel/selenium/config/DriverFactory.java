@@ -1,6 +1,6 @@
 package com.xmlangel.selenium.config;
 
-import com.lazerycode.selenium.util.Query;
+import com.xmlangel.selenium.utils.Query;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Proxy;

@@ -5,17 +5,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import com.xmlangel.selenium.utils.Query;
+
 
 public class CheckAboutPageIT extends DriverBase {
 
   private static final String Home_URL = "http://127.0.0.1:8080/html/index.html";
 
-  @Test
+  @Test(enabled = false)
   public void goToTheAboutPage() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
@@ -27,7 +30,7 @@ public class CheckAboutPageIT extends DriverBase {
     assertThat(element.getText(), is(equalTo("About us!")));
   }
 
-  @Test
+  @Test(enabled = false)
   public void checkThatAboutPageHasText() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
@@ -36,7 +39,7 @@ public class CheckAboutPageIT extends DriverBase {
     assertThat(titleText, is(equalTo("About us!")));
   }
 
-  @Test
+  @Test(enabled = false)
   public void goToTheAboutPage2() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
@@ -49,7 +52,7 @@ public class CheckAboutPageIT extends DriverBase {
     assertThat(aboutHeading.getText(), is(equalTo("About us!")));
   }
 
-  @Test
+  @Test(enabled = false)
   public void goToTheAboutPage3() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
@@ -59,7 +62,7 @@ public class CheckAboutPageIT extends DriverBase {
     assertThat(aboutHeading.getText(), is(equalTo("About us!")));
   }
 
-  @Test
+  @Test(enabled = false)
   public void logInToTheWebsite() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
@@ -71,8 +74,8 @@ public class CheckAboutPageIT extends DriverBase {
     submitButton.click();
     assertThat(driver.getTitle(), is(equalTo("Logged in")));
   }
-  
-  @Test
+
+  @Test(enabled = false)
   public void logInToTheWebsite2() throws Exception {
     WebDriver driver = getDriver();
     driver.get(Home_URL);
