@@ -58,8 +58,6 @@ public class Query {
    * query.addAlternateLocator(BrowserType.GOOGLECHROME,By.id("bar");
    * <p>
    * 
-   * 이 문자열은 향후 호환성을 위해 의도적으로 사용됩니다.
-   * This is intentionally a String for future compatibility.
    *
    * @param browser String value matching a browsername capability
    * @param locator A By object used for locating webElements
