@@ -1,6 +1,8 @@
 package com.xmlangel.selenium.page_objects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import com.xmlangel.selenium.utils.Log;
 import com.xmlangel.selenium.utils.Query;
 import com.xmlangel.selenium.utils.Wait;
 
@@ -16,12 +18,45 @@ public class AwsHomePage {
   // AWS 테이블의 마지막라인의 Viewing 을 기다리기위한엘리먼트
   Query awsS3viewing = new Query(By.xpath(
       "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/div[2]/div/span"));
+  // AWS Table Storage Title
   Query awsS3TableStorageClass = new Query(By.linkText("Storage class"));
+  
+  Query awsS3TableStorageClassOrder = new Query(By.xpath(
+      "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/table/thead/tr/th[4]/awsui-tooltip/span/span/span/[contains(sorting-descending]"));
+  // AWS s3 More Button
+  Query awsS3MoreBtn = new Query(By.xpath("//button[@type='button']"));
 
+  // AWS s3 Archer Priod Date Text Box
+  Query awsArchivedDaysTextBox = new Query(By.id("awsui-textfield-0"));
+
+  // S3 Glacier 리스토어 Summit버튼
+  Query awsS3GlacierRestoreSummitBtn = new Query(By.xpath("(//button[@type='submit'])[13]"));
+
+  public AwsHomePage clickGlacierRestoreSummitBtn() {
+    awsS3GlacierRestoreSummitBtn.findWebElement().click();
+
+    return this;
+  }
+
+
+  public AwsHomePage enterArchiverdDays(String Days) {
+    awsArchivedDaysTextBox.findWebElement().clear();
+    awsArchivedDaysTextBox.findWebElement().sendKeys(Days);
+
+    return this;
+  }
+
+  public AwsHomePage selectMoreBtn() {
+    awsS3MoreBtn.findWebElement().click();
+
+    return this;
+  }
 
   public AwsHomePage clickStorageClass() {
-    awsS3TableStorageClass.findWebElement().click();
+    awsS3TableStorageClass.findWebElement();
 
+    boolean check = awsS3TableStorageClassOrder.findWebElement().isEnabled();
+    Log.debug(String.valueOf(check));
     return this;
   }
 
@@ -61,6 +96,45 @@ public class AwsHomePage {
     awsSigninForm.findWebElement().submit();
 
     return this;
+  }
+
+  public void selectItemInText(WebDriver driver, String Name, int totalTable) {
+    String sColValue = Name;
+    String FileName = null;
+    String SizeField = null;
+    String LastModifiedField = null;
+    String StorageClassField = null;
+
+    String S3Table =
+        "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/table/tbody/tr";
+
+    for (int i = 1; i <= totalTable; i++) {
+      By S3BucketFileNameField = By.xpath(S3Table + "[" + i + "]/td[2]");
+      By S3BucketLastModifiedField = By.xpath(S3Table + "[" + i + "]/td[3]");
+      By S3BucketSizeField = By.xpath(S3Table + "[" + i + "]/td[4]");
+      By S3BucketStorageClassField = By.xpath(S3Table + "[" + i + "]/td[5]");
+
+      FileName = getTextOfField(driver, S3BucketFileNameField);
+      LastModifiedField = getTextOfField(driver, S3BucketLastModifiedField);
+      SizeField = getTextOfField(driver, S3BucketSizeField);
+      StorageClassField = getTextOfField(driver, S3BucketStorageClassField);
+
+      if (StorageClassField.equalsIgnoreCase(sColValue)) {
+
+        By firstCheckBox = By.xpath(S3Table + "/td/awsui-checkbox/label/div");
+
+        By NthCheckBox = By.xpath(S3Table + "[" + i + "]/td/awsui-checkbox/label/div");
+
+        driver.findElement(NthCheckBox).click();
+      }
+    }
+  }
+
+  private String getTextOfField(WebDriver driver, By locator) {
+    String sValue;
+    sValue = driver.findElement(locator).getText();
+    Log.debug(sValue);
+    return sValue;
   }
 
 }

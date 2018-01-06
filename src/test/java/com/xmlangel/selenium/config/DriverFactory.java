@@ -5,8 +5,11 @@ import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.MalformedURLException;
 import java.net.URL;
 import static com.xmlangel.selenium.config.DriverType.CHROME_HEADLESS;
@@ -45,6 +48,12 @@ public class DriverFactory {
     }
 
     return webdriver;
+  }
+
+  public void waitForElement(WebElement element) {
+
+    WebDriverWait wait = new WebDriverWait(webdriver, 10);
+    wait.until(ExpectedConditions.elementToBeClickable(element));
   }
 
   public void quitDriver() {

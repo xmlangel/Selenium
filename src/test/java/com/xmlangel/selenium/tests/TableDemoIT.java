@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.xmlangel.selenium.DriverBase;
 import com.xmlangel.selenium.utils.Log;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.xmlangel.selenium.page_objects.AwsHomePage;
 import com.xmlangel.selenium.utils.Table;
 import com.xmlangel.selenium.utils.Wait;
+import com.xmlangel.selenium.utils.Utils;
 
 public class TableDemoIT extends DriverBase {
   private static final Logger logger = LoggerFactory.getLogger(Log.class);
@@ -23,8 +25,6 @@ public class TableDemoIT extends DriverBase {
   private static final String awsPassword = "";
   private static final String awsLoginURL = "";
   private static final String awsBucketUrl = "";
-  Table getTable = new Table();
-  Wait wait = new Wait();
 
   @Test(enabled = false)
   public void tableTest_01() throws Exception {
@@ -61,10 +61,13 @@ public class TableDemoIT extends DriverBase {
   }
 
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void tableTest_awsTable() throws Exception {
 
     WebDriver driver = getDriver();
+    Table getTable = new Table();
+    Wait wait = new Wait();
+    
     System.out.println("awstest");
 
     driver.get(awsLoginURL);
@@ -89,10 +92,6 @@ public class TableDemoIT extends DriverBase {
 
     By endofviewing = By.xpath(
         "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/div[2]/div/span");// 맨하단의
-                                                                                                        // Page
-                                                                                                        // 표시
-
-
     driver.get(awsBucketUrl);
     wait.waitElementbyXpath(driver, paginationNumbering);
 
@@ -176,7 +175,6 @@ public class TableDemoIT extends DriverBase {
     // 리스토어Summit버튼
     By RestoreSummitBtn = By.xpath("(//button[@type='submit'])[13]");
     driver.findElement(RestoreSummitBtn).click();
-
   }
 
 }

@@ -28,7 +28,7 @@
  
     <logger name="src.Main.Child" additivity="true" />
  
-    <root level="info">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT" />
     </root>
  

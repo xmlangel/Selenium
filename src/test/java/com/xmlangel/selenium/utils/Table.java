@@ -4,6 +4,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import com.xmlangel.selenium.utils.Log;
 
 public class Table {
 
@@ -58,11 +59,10 @@ public class Table {
   }
   
   /**
-   * AWS 테이블의 특정텍스트가 있는 Check int
+   * AWS 테이블의 전체 Count 수를 반환한다.
    * 
    * @param WebDriver driver
    * @param By locator
-   * @param String Name
    */
   public int getTotalcountOfTable(WebDriver driver, By locator) {
     int tableRowNumber = 0;
@@ -71,12 +71,15 @@ public class Table {
     List<WebElement> columnsList = null;
     for (WebElement row : rowsList) {
       columnsList = row.findElements(By.tagName("td"));
-
+      
+      Log.debug(String.valueOf(tableRowNumber));
+      
       for (WebElement column : columnsList) {
         tableRowNumber = rowsList.indexOf(row);
       }
 
     }
+    
     return tableRowNumber;
   }
 }
