@@ -17,21 +17,31 @@ public class AwsHomePage {
   Query awsLanguageEn = new Query(By.id("en"));
   // AWS 테이블의 마지막라인의 Viewing 을 기다리기위한엘리먼트
   Query awsS3viewing = new Query(By.xpath(
-      "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/div[2]/div/span"));
+      "//div[@id='c'] /div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/div[2]/div/span"));
   // AWS Table Storage Title
   Query awsS3TableStorageClass = new Query(By.linkText("Storage class"));
-  
+
   Query awsS3TableStorageClassOrder = new Query(By.xpath(
-      "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/table/thead/tr/th[4]/awsui-tooltip/span/span/span/[contains(sorting-descending]"));
+      "//div[@id='c']/div/div/awsui-tabs/div/div/div/span/div/ng-include/div/div[2]/table/thead/tr/th[4]/awsui-tooltip/span/span/span"));
+  
   // AWS s3 More Button
   Query awsS3MoreBtn = new Query(By.xpath("//button[@type='button']"));
 
   // AWS s3 Archer Priod Date Text Box
-  Query awsArchivedDaysTextBox = new Query(By.id("awsui-textfield-0"));
+  Query awsS3ArchivedDaysTextBox = new Query(By.id("awsui-textfield-0"));
 
   // S3 Glacier 리스토어 Summit버튼
   Query awsS3GlacierRestoreSummitBtn = new Query(By.xpath("(//button[@type='submit'])[13]"));
+  
+  Query awsS3GlacierConfirm = new Query(By.xpath("//div[@id='confirmation-modal']/div/div[3]/dialog-modal-content/div[2]"));
 
+  public AwsHomePage clickGlacierConfirmBtn() {
+    awsS3GlacierRestoreSummitBtn.findWebElement().click();
+
+    return this;
+  }
+
+  
   public AwsHomePage clickGlacierRestoreSummitBtn() {
     awsS3GlacierRestoreSummitBtn.findWebElement().click();
 
@@ -40,8 +50,8 @@ public class AwsHomePage {
 
 
   public AwsHomePage enterArchiverdDays(String Days) {
-    awsArchivedDaysTextBox.findWebElement().clear();
-    awsArchivedDaysTextBox.findWebElement().sendKeys(Days);
+    awsS3ArchivedDaysTextBox.findWebElement().clear();
+    awsS3ArchivedDaysTextBox.findWebElement().sendKeys(Days);
 
     return this;
   }
@@ -54,11 +64,9 @@ public class AwsHomePage {
 
   public AwsHomePage clickStorageClass() {
     awsS3TableStorageClass.findWebElement();
-
-    boolean check = awsS3TableStorageClassOrder.findWebElement().isEnabled();
-    Log.debug(String.valueOf(check));
     return this;
   }
+
 
   public AwsHomePage checkviewing() {
     awsS3viewing.findWebElement();
