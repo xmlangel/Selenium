@@ -21,7 +21,7 @@ public class AwsHomePageIT extends DriverBase {
   private String name;
 
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void tableTest_01() throws Exception {
     name = new Object() {}.getClass().getEnclosingMethod().getName();
     Log.info(name);
@@ -167,7 +167,7 @@ public class AwsHomePageIT extends DriverBase {
   }
 
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void tableTest_awsTable() throws Exception {
 
     WebDriver driver = getDriver();
